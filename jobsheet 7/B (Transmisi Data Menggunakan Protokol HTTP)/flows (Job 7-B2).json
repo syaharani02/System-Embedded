@@ -1,0 +1,132 @@
+[
+    {
+        "id": "461d888e6e593394",
+        "type": "http in",
+        "z": "4153ca9d0623b403",
+        "name": "Input Dummy",
+        "url": "/testin",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 440,
+        "wires": [
+            [
+                "a0800ea2105eb6a0",
+                "ed58eba988999950",
+                "1b63b5da93c67268"
+            ]
+        ]
+    },
+    {
+        "id": "7e88f3702c3415b9",
+        "type": "debug",
+        "z": "4153ca9d0623b403",
+        "name": "dummy temp",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "bee42cdb0f755b30",
+        "type": "debug",
+        "z": "4153ca9d0623b403",
+        "name": "dummy humi",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "88287077e46bb478",
+        "type": "debug",
+        "z": "4153ca9d0623b403",
+        "name": "dummy light",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "a0800ea2105eb6a0",
+        "type": "function",
+        "z": "4153ca9d0623b403",
+        "name": "validation temp",
+        "func": "var obj = msg.payload;\nmsg.payload = obj.temp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 380,
+        "wires": [
+            [
+                "7e88f3702c3415b9"
+            ]
+        ]
+    },
+    {
+        "id": "ed58eba988999950",
+        "type": "function",
+        "z": "4153ca9d0623b403",
+        "name": "validation humi",
+        "func": "var obj = msg.payload;\nmsg.payload = obj.humi;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 440,
+        "wires": [
+            [
+                "bee42cdb0f755b30"
+            ]
+        ]
+    },
+    {
+        "id": "1b63b5da93c67268",
+        "type": "function",
+        "z": "4153ca9d0623b403",
+        "name": "validation light",
+        "func": "var obj = msg.payload;\nmsg.payload = obj.light;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 500,
+        "wires": [
+            [
+                "88287077e46bb478"
+            ]
+        ]
+    }
+]
