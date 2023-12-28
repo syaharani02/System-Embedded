@@ -1,0 +1,134 @@
+[
+    {
+        "id": "83791b562d9b5512",
+        "type": "http in",
+        "z": "4153ca9d0623b403",
+        "name": "Input Dummy",
+        "url": "/testin",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 180,
+        "wires": [
+            [
+                "05a4cbea218274d4"
+            ]
+        ]
+    },
+    {
+        "id": "05a4cbea218274d4",
+        "type": "function",
+        "z": "4153ca9d0623b403",
+        "name": "validation temp",
+        "func": "var status = 0;\nif (msg.payload.temp && msg.payload.humi && msg.payload.light) {\n    status = 1;\n}\nmsg.payload.status = status;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 180,
+        "wires": [
+            [
+                "0d0656fc9a06c001"
+            ]
+        ]
+    },
+    {
+        "id": "0d0656fc9a06c001",
+        "type": "switch",
+        "z": "4153ca9d0623b403",
+        "name": "Router",
+        "property": "payload.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 180,
+        "wires": [
+            [
+                "fd574d23d31aacbf",
+                "0f199b7acac7c6c5"
+            ],
+            [
+                "6f8d7e89fb0e4601",
+                "b51c0404e0e5d85a"
+            ]
+        ]
+    },
+    {
+        "id": "fd574d23d31aacbf",
+        "type": "http response",
+        "z": "4153ca9d0623b403",
+        "name": "Resp OK",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 740,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "6f8d7e89fb0e4601",
+        "type": "http response",
+        "z": "4153ca9d0623b403",
+        "name": "Resp Bad",
+        "statusCode": "400",
+        "headers": {
+            "content-type": "text/html"
+        },
+        "x": 740,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "0f199b7acac7c6c5",
+        "type": "debug",
+        "z": "4153ca9d0623b403",
+        "name": "OK",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b51c0404e0e5d85a",
+        "type": "debug",
+        "z": "4153ca9d0623b403",
+        "name": "Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 280,
+        "wires": []
+    }
+]
