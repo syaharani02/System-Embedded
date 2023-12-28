@@ -1,0 +1,472 @@
+[
+    {
+        "id": "99ec0a7b1a99f216",
+        "type": "http in",
+        "z": "bff3fffebadc51ab",
+        "name": "Input Dummy",
+        "url": "/sensor/node1",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 580,
+        "wires": [
+            [
+                "63dcdad5c9af0095"
+            ]
+        ]
+    },
+    {
+        "id": "63dcdad5c9af0095",
+        "type": "function",
+        "z": "bff3fffebadc51ab",
+        "name": "validation temp",
+        "func": "var status = 0;\nif (msg.payload.dev_id && msg.payload.rainfall && msg.payload.level) {\n    status = 1;\n}\nmsg.payload.status = status;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 580,
+        "wires": [
+            [
+                "97fe4019545e3b6b"
+            ]
+        ]
+    },
+    {
+        "id": "97fe4019545e3b6b",
+        "type": "switch",
+        "z": "bff3fffebadc51ab",
+        "name": "Router",
+        "property": "payload.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 580,
+        "wires": [
+            [
+                "8f003f6673a30729",
+                "c60d887a91fa2597"
+            ],
+            [
+                "f58259b2796d6d69"
+            ]
+        ]
+    },
+    {
+        "id": "8f003f6673a30729",
+        "type": "http response",
+        "z": "bff3fffebadc51ab",
+        "name": "Resp OK",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 680,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f58259b2796d6d69",
+        "type": "http response",
+        "z": "bff3fffebadc51ab",
+        "name": "Resp Bad",
+        "statusCode": "400",
+        "headers": {
+            "content-type": "text/html"
+        },
+        "x": 680,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "c60d887a91fa2597",
+        "type": "function",
+        "z": "bff3fffebadc51ab",
+        "name": "Query HTTP",
+        "func": "msg.topic = \"INSERT INTO banjir_table(time,dev_id,rainfall,level) VALUES(NOW(),\" + msg.payload.dev_id + \",\" + msg.payload.rainfall + \",\" + msg.payload.level +\");\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 560,
+        "wires": [
+            [
+                "5cc5423183b0813d",
+                "213f3f6b95f48021"
+            ]
+        ]
+    },
+    {
+        "id": "5cc5423183b0813d",
+        "type": "mysql",
+        "z": "bff3fffebadc51ab",
+        "mydb": "92097ced655025d9",
+        "name": "Database",
+        "x": 840,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "213f3f6b95f48021",
+        "type": "debug",
+        "z": "bff3fffebadc51ab",
+        "name": "HTTP Response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "4e418e2aeb0a5799",
+        "type": "mqtt in",
+        "z": "bff3fffebadc51ab",
+        "name": "Sub sensor/node1",
+        "topic": "sensor/node1",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "679684cd75f451dc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "f0e1c32840c4c634"
+            ]
+        ]
+    },
+    {
+        "id": "e110eb433e46a382",
+        "type": "json",
+        "z": "bff3fffebadc51ab",
+        "name": "JSON Parser",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 450,
+        "y": 280,
+        "wires": [
+            [
+                "a550ec0ce1e5b784",
+                "8f7a4d77aa0381e1",
+                "ac2b2048bebd150e"
+            ]
+        ]
+    },
+    {
+        "id": "82ec0dae47ae3b6f",
+        "type": "debug",
+        "z": "bff3fffebadc51ab",
+        "name": "rainfall value",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "92211e2793413fca",
+        "type": "debug",
+        "z": "bff3fffebadc51ab",
+        "name": "dev_id value",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "56586fbe27112f22",
+        "type": "debug",
+        "z": "bff3fffebadc51ab",
+        "name": "level value",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a550ec0ce1e5b784",
+        "type": "function",
+        "z": "bff3fffebadc51ab",
+        "name": "parser dev_id",
+        "func": "var val=msg.payload;\nmsg.payload=val.dev_id;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 240,
+        "wires": [
+            [
+                "92211e2793413fca"
+            ]
+        ]
+    },
+    {
+        "id": "8f7a4d77aa0381e1",
+        "type": "function",
+        "z": "bff3fffebadc51ab",
+        "name": "parser rainfall",
+        "func": "var val=msg.payload;\nmsg.payload=val.rainfall;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 280,
+        "wires": [
+            [
+                "82ec0dae47ae3b6f"
+            ]
+        ]
+    },
+    {
+        "id": "ac2b2048bebd150e",
+        "type": "function",
+        "z": "bff3fffebadc51ab",
+        "name": "parser level",
+        "func": "var val=msg.payload;\nmsg.payload=val.level;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 320,
+        "wires": [
+            [
+                "56586fbe27112f22"
+            ]
+        ]
+    },
+    {
+        "id": "f0e1c32840c4c634",
+        "type": "function",
+        "z": "bff3fffebadc51ab",
+        "name": "Switch",
+        "func": "if (typeof msg.payload === \"object\") {\n    if (msg.payload.dev_id && msg.payload.rainfall && msg.payload.level) {\n        return [msg];\n    }\n}\nelse if (typeof msg.payload === \"string\") {\n    return [null, msg];\n}\nelse if (typeof msg.payload === \"number\") {\n    return [null, null, msg];\n}\nelse if (typeof msg.payload === \"boolean\") {\n    return [null, null, null, msg];\n}\n// return msg;",
+        "outputs": 4,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 380,
+        "wires": [
+            [
+                "e110eb433e46a382",
+                "57dcd9029e2aea0b"
+            ],
+            [
+                "bf3fa8b2273b4eee"
+            ],
+            [
+                "747bc4956fd316d6"
+            ],
+            [
+                "62c055689e3129d6"
+            ]
+        ]
+    },
+    {
+        "id": "747bc4956fd316d6",
+        "type": "debug",
+        "z": "bff3fffebadc51ab",
+        "name": "number",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "bf3fa8b2273b4eee",
+        "type": "debug",
+        "z": "bff3fffebadc51ab",
+        "name": "string",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "62c055689e3129d6",
+        "type": "debug",
+        "z": "bff3fffebadc51ab",
+        "name": "boolean",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "57dcd9029e2aea0b",
+        "type": "function",
+        "z": "bff3fffebadc51ab",
+        "name": "Query MQTT",
+        "func": "msg.topic = \"INSERT INTO banjir_table(time,dev_id,rainfall,level) VALUES(NOW(),\" + msg.payload.dev_id + \",\" + msg.payload.rainfall + \",\" + msg.payload.level +\");\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "b5b7a4861cf3f913"
+            ]
+        ]
+    },
+    {
+        "id": "580d13a55123c7f7",
+        "type": "debug",
+        "z": "bff3fffebadc51ab",
+        "name": "MQTT Response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b5b7a4861cf3f913",
+        "type": "mysql",
+        "z": "bff3fffebadc51ab",
+        "mydb": "92097ced655025d9",
+        "name": "Database",
+        "x": 640,
+        "y": 200,
+        "wires": [
+            [
+                "580d13a55123c7f7"
+            ]
+        ]
+    },
+    {
+        "id": "92097ced655025d9",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "172.18.0.1",
+        "port": "3306",
+        "db": "nodered",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "679684cd75f451dc",
+        "type": "mqtt-broker",
+        "name": "My Broker",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
