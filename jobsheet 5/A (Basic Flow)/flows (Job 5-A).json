@@ -1,0 +1,56 @@
+[
+    {
+        "id": "b7af5cbb79948da5",
+        "type": "tab",
+        "label": "Job 5 A",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "49cd2cf75bbf52d1",
+        "type": "inject",
+        "z": "b7af5cbb79948da5",
+        "name": "Input",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "test",
+        "payload": "Hello World",
+        "payloadType": "str",
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "61dccacb1e9501c5"
+            ]
+        ]
+    },
+    {
+        "id": "61dccacb1e9501c5",
+        "type": "debug",
+        "z": "b7af5cbb79948da5",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 220,
+        "wires": []
+    }
+]
