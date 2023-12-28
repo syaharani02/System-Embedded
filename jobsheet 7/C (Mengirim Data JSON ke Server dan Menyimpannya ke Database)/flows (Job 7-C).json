@@ -1,0 +1,159 @@
+[
+    {
+        "id": "8ed7c1aa6d393cd5",
+        "type": "http in",
+        "z": "056dd9dae19a7f45",
+        "name": "Input Dummy",
+        "url": "/sensor/node1",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "6ecb1bce66db5dfc"
+            ]
+        ]
+    },
+    {
+        "id": "6ecb1bce66db5dfc",
+        "type": "function",
+        "z": "056dd9dae19a7f45",
+        "name": "validation temp",
+        "func": "var status = 0;\nif (msg.payload.dev_id && msg.payload.rainfall && msg.payload.level) {\n    status = 1;\n}\nmsg.payload.status = status;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "f587dd8c994d64e8"
+            ]
+        ]
+    },
+    {
+        "id": "f587dd8c994d64e8",
+        "type": "switch",
+        "z": "056dd9dae19a7f45",
+        "name": "Router",
+        "property": "payload.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 490,
+        "y": 200,
+        "wires": [
+            [
+                "893c2df6c4c2a4a0",
+                "cf20336060078693"
+            ],
+            [
+                "07d4bcbbbc3dca7c"
+            ]
+        ]
+    },
+    {
+        "id": "893c2df6c4c2a4a0",
+        "type": "http response",
+        "z": "056dd9dae19a7f45",
+        "name": "Resp OK",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 660,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "07d4bcbbbc3dca7c",
+        "type": "http response",
+        "z": "056dd9dae19a7f45",
+        "name": "Resp Bad",
+        "statusCode": "400",
+        "headers": {
+            "content-type": "text/html"
+        },
+        "x": 660,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "cf20336060078693",
+        "type": "function",
+        "z": "056dd9dae19a7f45",
+        "name": "Query",
+        "func": "msg.topic = \"INSERT INTO banjir_table(dev_id,rainfall,level) VALUES(\" + msg.payload.dev_id + \",\" + msg.payload.rainfall + \",\" + msg.payload.level +\");\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 180,
+        "wires": [
+            [
+                "d6ebef21c6160cb6",
+                "58b5cddb70a8767e"
+            ]
+        ]
+    },
+    {
+        "id": "d6ebef21c6160cb6",
+        "type": "mysql",
+        "z": "056dd9dae19a7f45",
+        "mydb": "92097ced655025d9",
+        "name": "Database",
+        "x": 820,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58b5cddb70a8767e",
+        "type": "debug",
+        "z": "056dd9dae19a7f45",
+        "name": "Response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "92097ced655025d9",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "172.18.0.1",
+        "port": "3306",
+        "db": "nodered",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
