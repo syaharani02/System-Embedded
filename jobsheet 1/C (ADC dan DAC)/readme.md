@@ -10,21 +10,8 @@ Terdapat 2 percobaan yang dilakukan :
 - Potensiometer 10 kOhm (1 buah)
 - Kabel Jumper (secukupnya)
 
-**Skema Rangkaian**
-
-![Skematik (Job 1-C)](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/7f9644af-a182-4c4d-9342-5185195e2aa0)
-
-**Program** <a href="https://github.com/syaharani02/Jobsheet-Embedded/blob/main/Jobsheet%201/C%20(ADC%20dan%20DAC)/ADC/ADC.ino">(File .ino)</a>
-
-![image](https://github.com/syaharani02g/Jobsheet-Embedded/assets/128274951/ffdb1e7d-1637-4247-a33b-fa523157af9c)
-
-**Flowchart**
-
-![Flowchart Job1 C-1 (ADC)](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/51acfee7-a9c2-4aea-8c64-42fd590c8b07)
 
 **Hasil dan Pembahasan**
-
-![Job 1C_1](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/81a36f2f-6bc4-470b-9d09-ecd7f8394ac6)
 
 Program ini mengimplementasikan pembacaan nilai potensiometer pada mikrokontroler. Berikut adalah cara kerjanya:
 
@@ -57,21 +44,8 @@ Program ini memberikan pemahaman dasar tentang penggunaan ADC (Analog-to-Digital
 - Resistor 220 Ohm (1 buah)
 - Kabel Jumper (secukupnya)
 
-**Skema Rangkaian**
-
-![Skematik Job1 C-2](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/2820baf8-2f7b-46d5-9df4-b327fdeda1b6)
-
-**Program** <a href="https://github.com/syaharani02/Jobsheet-Embedded/blob/main/Jobsheet%201/C%20(ADC%20dan%20DAC)/DAC/DAC.ino">(File .ino)</a>
-
-![image](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/ff78d7f3-ac32-48f8-89d8-933b36991498)
-
-**Flowchart**
-
-![Flowchart Job1 C-2 (DAC)](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/8eabc82c-2dae-42aa-b787-e7a60458ef52)
 
 **Hasil dan Pembahasan**
-
-![Job 1C_2](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/9c818812-d3b9-47f3-b0bd-38ac9e3e75c0)
 
 Program ini berfungsi untuk mengendalikan intensitas cahaya LED berdasarkan nilai yang dibaca dari potensiometer. Berikut adalah cara kerjanya:
 
