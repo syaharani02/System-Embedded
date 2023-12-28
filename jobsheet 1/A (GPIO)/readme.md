@@ -11,22 +11,7 @@ Percobaan ini ditujukan agar dapat memahami penggunaan pin GPIO pada ESP32. Terd
 - Push Button (1 buah)
 - Kabel Jumper (secukupnya)
 
-**Skema Rangkaian**
-
-![Skematik (Job 1-A)][(https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/66c26000-428d-4d83-95aa-9acc5118c28d)](https://github.com/syaharani02/System-Embedded/blob/7bf6117dd85fe3ef822cb7012f7f848991fd102d/jobsheet%201/A%20(GPIO)/Skematik%20(Job%201-A%204).jpg)
-
-**Program** <a href="https://github.com/syaharani02/Jobsheet-Embedded/tree/main/Jobsheet%201/A%20(GPIO)/1._Langkah_2.ino/1._Langkah_2.ino.ino">(File .ino)</a>
-
-![image](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/6fdb5909-513d-4e39-92b7-99230cfb9cc6)
-
-**Flowchart**
-
-![Flowchart Job1 A-2](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/cde437ea-2f4a-4ac4-a70b-d957d6386fb9)
-
-
 **Hasil dan Pembahasan**
-
-![Job 1A_2](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/f2d83b66-ab0b-4652-923e-cf0927875a22)
 
 Program ini dibuat untuk mengatur kedipan LED setiap 1 detik. Pengendalian LED dilakukan menggunakan fungsi `millis()` yang merupakan metode non-blocking/asinkron. Metode asinkron akan terus dijalankan dan tidak terpaku pada program utama (berjalan terpisah). Beberapa variabel yang digunakan meliputi:
 
@@ -50,22 +35,7 @@ Program ini berfungsi menghasilkan efek berkedip pada LED setiap 1 detik dengan 
 - Push Button (1 buah)
 - Kabel Jumper (secukupnya)
 
-**Skema Rangkaian**
-
-![Skematik (Job 1-A)](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/66c26000-428d-4d83-95aa-9acc5118c28d)
-
-**Program** <a href="https://github.com/syaharani02/Jobsheet-Embedded/blob/main/Jobsheet%201/A%20(GPIO)/1._Langkah_3.ino/1._Langkah_3.ino.ino">(File .ino)</a>
-
-![image](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/8c5b6f6a-76ef-4e4e-a3d5-bf5fa6002ee1)
-
-
-**Flowchart**
-
-![Flowchart Job1 A-3](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/8881fd0b-b384-4144-86a7-54ffc5afdbee)
-
 **Hasil dan Pembahasan**
-
-![Job 1A_3](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/26d0fab2-db22-4e74-8843-61296125cf6d)
 
 Program dimulai dengan melakukan inisialisasi variabel input dan output:
 
@@ -95,21 +65,7 @@ Program ini berfungsi menyalakan LED hanya ketika button ditekan, jadi button be
 - Push Button (2 buah)
 - Kabel Jumper (secukupnya)
 
-**Skema Rangkaian**
-
-![Skematik (Job 1-A 4)](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/e328903d-42a6-41aa-88fd-4aa85b0f4d53)
-
-**Program** <a href="https://github.com/syaharani02/Jobsheet-Embedded/blob/main/Jobsheet%201/A%20(GPIO)/1._Langkah_4.ino/1._Langkah_4.ino.ino">(File .ino)</a>
-
-![image](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/c62988bb-b9e0-49b8-a084-a6ad83eccb2a)
-
-**Flowchart**
-
-![Flowchart Job1 A-4](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/babf0559-e508-4dbb-adc7-f2d19848528a)
-
 **Hasil dan Pembahasan**
-
-![Job 1A_4](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/3ec1ab7c-023f-425a-a32d-bdd115286f46)
 
 Program ini merupakan lanjutan dari percobaan sebelumnya, dimana terdapat tambahan 1 buah LED dan 1 buah push button. Untuk itu kita harus memulai dengan mendeklarasikan pin GPIO untuk dua push button (`buttonPin1` dan `buttonPin2`) serta dua LED (`ledPin1` dan `ledPin2`).
 
@@ -136,21 +92,7 @@ Program ini berfungsi menghasilkan efek LED berkedip hanya ketika button ke-2 di
 - Push Button (3 buah)
 - Kabel Jumper (secukupnya)
 
-**Skema Rangkaian**
-
-![Skematik (Job 1-A 5)](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/8491d78c-4a90-47d6-b3db-aebf0a23ed17)
-
-**Program** <a href="https://github.com/syaharani02/Jobsheet-Embedded/blob/main/Jobsheet%201/A%20(GPIO)/1._Langkah_5.ino/1._Langkah_5.ino.ino">(File .ino)</a>
-
-![image](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/31b5430e-3301-4ad6-8060-00b7a55ce519)
-
-**Flowchart**
-
-![Flowchart Job1 A-5](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/31e30171-5ef0-4212-a99e-9f98bda54f54)
-
 **Hasil dan Pembahasan**
-
-![Job 1A_5](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/dba1458c-f8e8-429f-a66c-c3fba2d6dd6d)
 
 Running LED merupakan beberapa lampu LED yang menyala bergantian dengan rapi (kiri ke kanan atau sebaliknya), maka setidaknya dibutuhkan 3 lampu LED untuk menerapkannya. Sama seperti sebelumnya, kita hanya menambahkan satu buah push button sekali lagi dan juga setidaknya 1 buah LED. Agar program kita terlihat lebih efisien, kita bisa menggunakan function `for()`. `For()` merupakan suatu fungsi berupa proses pengulangan tugas/kegiatan pada suatu statement atau lebih secara berulang ulang-ulang selama yang dijadikan acuan tersebut terpenuhi dengan baik.
 
