@@ -1,0 +1,154 @@
+[
+    {
+        "id": "fadf41d752a17ae7",
+        "type": "inject",
+        "z": "d3e4be8004f8e611",
+        "name": "Temperature",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "livingroom/sensors",
+        "payload": "{\"temp\":24,\"humi\":30,\"light\":10}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "1bb020cf18312681"
+            ]
+        ]
+    },
+    {
+        "id": "1bb020cf18312681",
+        "type": "mqtt out",
+        "z": "d3e4be8004f8e611",
+        "name": "Pub/Sub Living Room",
+        "topic": "livingroom/sensors",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "679684cd75f451dc",
+        "x": 280,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "68c293334b066838",
+        "type": "mqtt in",
+        "z": "d3e4be8004f8e611",
+        "name": "Broker Living Room",
+        "topic": "livingroom/sensors",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "679684cd75f451dc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "6f92d0e57ec6b91e"
+            ]
+        ]
+    },
+    {
+        "id": "6f92d0e57ec6b91e",
+        "type": "json",
+        "z": "d3e4be8004f8e611",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 610,
+        "y": 160,
+        "wires": [
+            [
+                "42eaf27b1fc058f8"
+            ]
+        ]
+    },
+    {
+        "id": "42eaf27b1fc058f8",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "Fungsi",
+        "func": "var val = msg.payload;\nmsg.payload = val.humi;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "47d215fe98d22dcf"
+            ]
+        ]
+    },
+    {
+        "id": "47d215fe98d22dcf",
+        "type": "debug",
+        "z": "d3e4be8004f8e611",
+        "name": "Message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "679684cd75f451dc",
+        "type": "mqtt-broker",
+        "name": "My Broker",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
