@@ -1,0 +1,648 @@
+[
+    {
+        "id": "b7803fe33c059ccf",
+        "type": "mqtt in",
+        "z": "8ebf4b366a6bee14",
+        "name": "Broker Livingroom",
+        "topic": "livingroom/sensors",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "679684cd75f451dc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 1100,
+        "wires": [
+            [
+                "6bd81e8698bb0534"
+            ]
+        ]
+    },
+    {
+        "id": "e4a75936892af63f",
+        "type": "mqtt out",
+        "z": "8ebf4b366a6bee14",
+        "name": "Pub/Sub Livingroom",
+        "topic": "livingroom/sensors",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "679684cd75f451dc",
+        "x": 500,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "08511d5b27fc9a74",
+        "type": "inject",
+        "z": "8ebf4b366a6bee14",
+        "name": "livingroom",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "livingroom/sensors",
+        "payload": "{\"temp\":24,\"humi\":30,\"light\":10}",
+        "payloadType": "json",
+        "x": 120,
+        "y": 880,
+        "wires": [
+            [
+                "f07b93361e72bbf0"
+            ]
+        ]
+    },
+    {
+        "id": "000c9fdbdfd45273",
+        "type": "json",
+        "z": "8ebf4b366a6bee14",
+        "name": "JSON Parser",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 450,
+        "y": 1000,
+        "wires": [
+            [
+                "74b2342035694bcc",
+                "72925b2d34bd235e",
+                "4205f54f66d27d3f"
+            ]
+        ]
+    },
+    {
+        "id": "d9a593798a2e589b",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "humi-livingroom",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "3811b8578dea72ba",
+        "type": "inject",
+        "z": "8ebf4b366a6bee14",
+        "name": "kitchen",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "kitchen/sensors",
+        "payload": "{\"flame\":0,\"metane\":0,\"temp\":24,\"humi\":38}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 940,
+        "wires": [
+            [
+                "f07b93361e72bbf0"
+            ]
+        ]
+    },
+    {
+        "id": "f07b93361e72bbf0",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "input",
+        "func": "var topic = msg.topic;\nif(topic == \"livingroom/sensors\") {\n    return [msg,null];\n}\nif(topic == \"kitchen/sensors\") {\n    return [null,msg];\n}\nreturn msg;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 900,
+        "wires": [
+            [
+                "e4a75936892af63f"
+            ],
+            [
+                "ab2650412fc2e5c6"
+            ]
+        ]
+    },
+    {
+        "id": "08c0019c5fd03222",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "temp-livingroom",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "ab2650412fc2e5c6",
+        "type": "mqtt out",
+        "z": "8ebf4b366a6bee14",
+        "name": "Pub/Sub Kitchen",
+        "topic": "kitchen/sensors",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "679684cd75f451dc",
+        "x": 490,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "4279d84780fdb20e",
+        "type": "mqtt in",
+        "z": "8ebf4b366a6bee14",
+        "name": "Broker Kitchen",
+        "topic": "kitchen/sensors",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "679684cd75f451dc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 1240,
+        "wires": [
+            [
+                "1684842b3c011f17"
+            ]
+        ]
+    },
+    {
+        "id": "9acf32753253c091",
+        "type": "json",
+        "z": "8ebf4b366a6bee14",
+        "name": "JSON Parser",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 450,
+        "y": 1240,
+        "wires": [
+            [
+                "2294931b015abb03",
+                "0b08ce83b51f19f0",
+                "3839416f16edb791",
+                "9845b75b7a4b549d"
+            ]
+        ]
+    },
+    {
+        "id": "2294931b015abb03",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "parser flame",
+        "func": "var val=msg.payload;\nmsg.payload=val.flame;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1240,
+        "wires": [
+            [
+                "1c25a7a9aa1ecb3c"
+            ]
+        ]
+    },
+    {
+        "id": "69538765687bcbb7",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "light-livingroom",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "74b2342035694bcc",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "parser temp",
+        "func": "var val=msg.payload;\nmsg.payload=val.temp;\nif(msg.payload != null) {return msg;}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 960,
+        "wires": [
+            [
+                "08c0019c5fd03222"
+            ]
+        ]
+    },
+    {
+        "id": "72925b2d34bd235e",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "parser humi",
+        "func": "var val=msg.payload;\nmsg.payload=val.humi;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1000,
+        "wires": [
+            [
+                "d9a593798a2e589b"
+            ]
+        ]
+    },
+    {
+        "id": "4205f54f66d27d3f",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "parser light",
+        "func": "var val=msg.payload;\nmsg.payload=val.light;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1040,
+        "wires": [
+            [
+                "69538765687bcbb7"
+            ]
+        ]
+    },
+    {
+        "id": "1c25a7a9aa1ecb3c",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "flame-kitchen",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "cb5a9c97a8a7f4a4",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "temp-kitchen",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "950474e66392d0f6",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "humi-kitchen",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "0b08ce83b51f19f0",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "parser temp",
+        "func": "var val=msg.payload;\nmsg.payload=val.temp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1360,
+        "wires": [
+            [
+                "cb5a9c97a8a7f4a4"
+            ]
+        ]
+    },
+    {
+        "id": "3839416f16edb791",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "parser humi",
+        "func": "var val=msg.payload;\nmsg.payload=val.humi;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 1400,
+        "wires": [
+            [
+                "950474e66392d0f6"
+            ]
+        ]
+    },
+    {
+        "id": "9845b75b7a4b549d",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "parser metane",
+        "func": "var val=msg.payload;\nmsg.payload=val.metane;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 1300,
+        "wires": [
+            [
+                "69bfe64f3910cb6e"
+            ]
+        ]
+    },
+    {
+        "id": "6bd81e8698bb0534",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "Switch",
+        "func": "if (typeof msg.payload === \"object\") {\n    return [msg];\n}\nelse if (typeof msg.payload === \"string\") {\n    return [null, msg];\n}\nelse if (typeof msg.payload === \"number\") {\n    return [null, null, msg];\n}\nelse if (typeof msg.payload === \"boolean\") {\n    return [null, null, null, msg];\n}\n// return msg;",
+        "outputs": 4,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 1100,
+        "wires": [
+            [
+                "000c9fdbdfd45273"
+            ],
+            [
+                "0faf040e29385746"
+            ],
+            [
+                "5fcedbf5d29c4d2e"
+            ],
+            [
+                "f63d364e57ea58f9"
+            ]
+        ]
+    },
+    {
+        "id": "5fcedbf5d29c4d2e",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "livingroom-number",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "0faf040e29385746",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "livingroom-string",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "f63d364e57ea58f9",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "livingroom-boolean",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "1684842b3c011f17",
+        "type": "function",
+        "z": "8ebf4b366a6bee14",
+        "name": "Switch",
+        "func": "if (typeof msg.payload === \"object\") {\n    return [msg];\n}\nelse if (typeof msg.payload === \"string\") {\n    return [null, msg];\n}\nelse if (typeof msg.payload === \"number\") {\n    return [null, null, msg];\n}\nelse if (typeof msg.payload === \"boolean\") {\n    return [null, null, null, msg];\n}\n// return msg;",
+        "outputs": 4,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 1240,
+        "wires": [
+            [
+                "9acf32753253c091"
+            ],
+            [
+                "6df37927d635e207"
+            ],
+            [
+                "ddb0374a47db87ae"
+            ],
+            [
+                "640e5896c8b2f492"
+            ]
+        ]
+    },
+    {
+        "id": "ddb0374a47db87ae",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "kitchen-number",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "6df37927d635e207",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "kitchen-string",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "640e5896c8b2f492",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "kitchen-boolean",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "69bfe64f3910cb6e",
+        "type": "debug",
+        "z": "8ebf4b366a6bee14",
+        "name": "metane-kitchen",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "679684cd75f451dc",
+        "type": "mqtt-broker",
+        "name": "My Broker",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
