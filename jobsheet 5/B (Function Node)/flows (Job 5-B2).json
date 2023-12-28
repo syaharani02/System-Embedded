@@ -1,0 +1,117 @@
+[
+    {
+        "id": "a31d69e0ffd11554",
+        "type": "inject",
+        "z": "ce0e7c49a07c3ed7",
+        "name": "Input 1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "test1",
+        "payload": "Hello World",
+        "payloadType": "str",
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "73415483dc736df5"
+            ]
+        ]
+    },
+    {
+        "id": "7d9a5dca5f587d28",
+        "type": "debug",
+        "z": "ce0e7c49a07c3ed7",
+        "name": "Output 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "73415483dc736df5",
+        "type": "function",
+        "z": "ce0e7c49a07c3ed7",
+        "name": "Fungsi",
+        "func": "var topic = msg.topic;\nif(topic == 'test1') {\n    return [msg,null];\n}\nelse if (topic == 'test2') {\n    return [null,msg];\n}\nreturn msg;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 433,
+        "y": 272,
+        "wires": [
+            [
+                "7d9a5dca5f587d28"
+            ],
+            [
+                "f0709d740bbe6f88"
+            ]
+        ]
+    },
+    {
+        "id": "fb4baeb69e4eab86",
+        "type": "inject",
+        "z": "ce0e7c49a07c3ed7",
+        "name": "Input 2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "test2",
+        "payload": "Expeliarmus",
+        "payloadType": "str",
+        "x": 270,
+        "y": 300,
+        "wires": [
+            [
+                "73415483dc736df5"
+            ]
+        ]
+    },
+    {
+        "id": "f0709d740bbe6f88",
+        "type": "debug",
+        "z": "ce0e7c49a07c3ed7",
+        "name": "Output 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 300,
+        "wires": []
+    }
+]
