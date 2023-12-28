@@ -13,7 +13,7 @@ Percobaan ini ditujukan agar dapat memahami penggunaan pin GPIO pada ESP32. Terd
 
 **Skema Rangkaian**
 
-![Skematik (Job 1-A)](https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/66c26000-428d-4d83-95aa-9acc5118c28d)
+![Skematik (Job 1-A)][(https://github.com/syaharani02/Jobsheet-Embedded/assets/128274951/66c26000-428d-4d83-95aa-9acc5118c28d)](https://github.com/syaharani02/System-Embedded/blob/7bf6117dd85fe3ef822cb7012f7f848991fd102d/jobsheet%201/A%20(GPIO)/Skematik%20(Job%201-A%204).jpg)
 
 **Program** <a href="https://github.com/syaharani02/Jobsheet-Embedded/tree/main/Jobsheet%201/A%20(GPIO)/1._Langkah_2.ino/1._Langkah_2.ino.ino">(File .ino)</a>
 
