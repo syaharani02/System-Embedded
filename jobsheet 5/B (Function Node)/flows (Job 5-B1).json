@@ -1,0 +1,68 @@
+[
+    {
+        "id": "a9f642a191641caa",
+        "type": "inject",
+        "z": "ce0e7c49a07c3ed7",
+        "name": "Input 1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "test1",
+        "payload": "Hello World",
+        "payloadType": "str",
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "a487094f6785c0ab"
+            ]
+        ]
+    },
+    {
+        "id": "b4dd1f62fc171e06",
+        "type": "debug",
+        "z": "ce0e7c49a07c3ed7",
+        "name": "Output 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a487094f6785c0ab",
+        "type": "function",
+        "z": "ce0e7c49a07c3ed7",
+        "name": "Fungsi",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "b4dd1f62fc171e06"
+            ]
+        ]
+    }
+]
