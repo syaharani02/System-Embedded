@@ -1,0 +1,159 @@
+[
+    {
+        "id": "8938b83efedba74f",
+        "type": "comment",
+        "z": "127b2f2a9ce56797",
+        "name": "Server",
+        "info": "",
+        "x": 370,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6b30060fb9be973b",
+        "type": "http in",
+        "z": "127b2f2a9ce56797",
+        "name": "get /labiot",
+        "url": "/labiot-time",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "b828f4b7a0b1b092"
+            ]
+        ]
+    },
+    {
+        "id": "ea921452e3de6dac",
+        "type": "http response",
+        "z": "127b2f2a9ce56797",
+        "name": "",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "text/html"
+        },
+        "x": 540,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c3da878fca09dbe4",
+        "type": "websocket in",
+        "z": "127b2f2a9ce56797",
+        "name": "[ws] /ws/labiot",
+        "server": "247246ff17811994",
+        "client": "",
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "eb52703592a467fe"
+            ]
+        ]
+    },
+    {
+        "id": "02350510cfb99849",
+        "type": "websocket out",
+        "z": "127b2f2a9ce56797",
+        "name": "[ws] /ws/labiot",
+        "server": "247246ff17811994",
+        "client": "",
+        "x": 560,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0cde7129eccc9b48",
+        "type": "function",
+        "z": "127b2f2a9ce56797",
+        "name": "format waktu",
+        "func": "msg.payload = new Date(msg.payload).toString();\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "02350510cfb99849"
+            ]
+        ]
+    },
+    {
+        "id": "eb52703592a467fe",
+        "type": "debug",
+        "z": "127b2f2a9ce56797",
+        "name": "payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b828f4b7a0b1b092",
+        "type": "template",
+        "z": "127b2f2a9ce56797",
+        "name": "Simple Web Page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "plain",
+        "template": "<!DOCTYPE HTML>\n<html>\n  <head>\n    <title>Simple Live Display</title>\n    <script type=\"text/javascript\">\n      var ws;\n      var wsUri = \"ws:\";\n      var loc = window.location;\n      console.log(loc);\n      if (loc.protocol === \"https:\") {\n        wsUri = \"wss:\";\n      }\n      // This needs to point to the web socket in the Node-RED flow\n      // ... in this case it's ws/simple\n      wsUri += \"//\" + loc.host + loc.pathname.replace(\"labiot-time\", \"ws/labiottime\");\n\n      function wsConnect() {\n        console.log(\"connect\", wsUri);\n        ws = new WebSocket(wsUri);\n        // var line = \"\"; // either uncomment this for a building list of messages\n        ws.onmessage = function (msg) {\n          var line = \"\"; // or uncomment this to overwrite the existing message\n          // parse the incoming message as a JSON object\n          var data = msg.data;\n          // console.log(data);\n          // build the output from the topic and payload parts of the object\n          line += \"<p>\" + data + \"</p>\";\n          // replace the messages div with the new \"line\"\n          document.getElementById('messages').innerHTML = line;\n          // ws.send(JSON.stringify({data:data}));\n        };\n\n        ws.onopen = function () {\n          // update the status div with the connection status\n          document.getElementById('status').innerHTML = \"connected\";\n          // ws.send(\"Open for data\");\n          console.log(\"connected\");\n        };\n        ws.onclose = function () {\n          // update the status div with the connection status\n          document.getElementById('status').innerHTML = \"not connected\";\n          // in case of a lost connection, try to reconnect every 3 secs\n          setTimeout(wsConnect, 3000);\n        };\n      }\n\n      function doit(m) {\n        if (ws) {\n          ws.send(m);\n        }\n      }\n      \n      // Change from ws.disconnect() to ws.close()\n      window.onunload = function () {\n        if (ws) {\n          ws.close();\n        }\n      };\n    </script>\n  </head>\n  <body onload=\"wsConnect();\">\n    <font face=\"Arial\">\n      <h1>Simple Live Display</h1>\n      <div id=\"messages\"></div>\n      <button type=\"button\" onclick='doit(\"Pesan dari Lab IoT\");'>Click to send message</button>\n      <hr />\n      <div id=\"status\">unknown</div>\n    </font>\n  </body>\n</html>\n",
+        "output": "str",
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "ea921452e3de6dac"
+            ]
+        ]
+    },
+    {
+        "id": "69d9302d732654f5",
+        "type": "inject",
+        "z": "127b2f2a9ce56797",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 240,
+        "wires": [
+            [
+                "0cde7129eccc9b48"
+            ]
+        ]
+    },
+    {
+        "id": "247246ff17811994",
+        "type": "websocket-listener",
+        "path": "/ws/labiot-time",
+        "wholemsg": "false"
+    }
+]
