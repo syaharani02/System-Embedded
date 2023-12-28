@@ -1,0 +1,488 @@
+[
+    {
+        "id": "cae2ff92fd6c997b",
+        "type": "mqtt in",
+        "z": "d3e4be8004f8e611",
+        "name": "Broker livingroom",
+        "topic": "livingroom/sensors",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "679684cd75f451dc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 660,
+        "wires": [
+            [
+                "df7193c38a8bc983"
+            ]
+        ]
+    },
+    {
+        "id": "b988e8c9d95d01ee",
+        "type": "mqtt out",
+        "z": "d3e4be8004f8e611",
+        "name": "Pub/Sub livingroom",
+        "topic": "livingroom/sensors",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "679684cd75f451dc",
+        "x": 550,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "7daf415269c415c2",
+        "type": "inject",
+        "z": "d3e4be8004f8e611",
+        "name": "livingroom",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "livingroom/sensors",
+        "payload": "{\"temp\":24,\"humi\":30,\"light\":10}",
+        "payloadType": "json",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            [
+                "7fc6129d1cdc5a77"
+            ]
+        ]
+    },
+    {
+        "id": "df7193c38a8bc983",
+        "type": "json",
+        "z": "d3e4be8004f8e611",
+        "name": "JSON Parser",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 470,
+        "y": 660,
+        "wires": [
+            [
+                "93aa466a6ad020b3",
+                "381e44621692fb95",
+                "499f4ce05105c445"
+            ]
+        ]
+    },
+    {
+        "id": "15dec382f73068a7",
+        "type": "debug",
+        "z": "d3e4be8004f8e611",
+        "name": "humi-livingroom",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "ceb9972ee1d443a9",
+        "type": "inject",
+        "z": "d3e4be8004f8e611",
+        "name": "kitchen",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "kitchen/sensors",
+        "payload": "{\"flame\":0,\"metane\":0,\"temp\":24,\"humi\":38}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 660,
+        "wires": [
+            [
+                "7fc6129d1cdc5a77"
+            ]
+        ]
+    },
+    {
+        "id": "7fc6129d1cdc5a77",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "function 3",
+        "func": "var topic = msg.topic;\nif(topic == \"livingroom/sensors\") {\n    return [msg,null];\n}\nif(topic == \"kitchen/sensors\") {\n    return [null,msg];\n}\nreturn msg;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 600,
+        "wires": [
+            [
+                "b988e8c9d95d01ee"
+            ],
+            [
+                "89c1196e1bb66707"
+            ]
+        ]
+    },
+    {
+        "id": "5234cee59f3ffb11",
+        "type": "debug",
+        "z": "d3e4be8004f8e611",
+        "name": "temp-livingroom",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "89c1196e1bb66707",
+        "type": "mqtt out",
+        "z": "d3e4be8004f8e611",
+        "name": "",
+        "topic": "kitchen/sensors",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "679684cd75f451dc",
+        "x": 540,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "6cf5ee904aff8fe2",
+        "type": "mqtt in",
+        "z": "d3e4be8004f8e611",
+        "name": "Broker kitchen",
+        "topic": "kitchen/sensors",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "679684cd75f451dc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 330,
+        "y": 760,
+        "wires": [
+            [
+                "1b5620c252bb39be"
+            ]
+        ]
+    },
+    {
+        "id": "1b5620c252bb39be",
+        "type": "json",
+        "z": "d3e4be8004f8e611",
+        "name": "JSON Parser",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 470,
+        "y": 760,
+        "wires": [
+            [
+                "25b2ae665fbddd6a",
+                "2f46bbda3c9e698b",
+                "a88d6554340cb7e2",
+                "9b859da556a88bcc"
+            ]
+        ]
+    },
+    {
+        "id": "25b2ae665fbddd6a",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "parser flame",
+        "func": "var val=msg.payload;\nmsg.payload=val.flame;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 760,
+        "wires": [
+            [
+                "c02984662e259a9e"
+            ]
+        ]
+    },
+    {
+        "id": "e807565d60ea8dc5",
+        "type": "debug",
+        "z": "d3e4be8004f8e611",
+        "name": "light-livingroom",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "93aa466a6ad020b3",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "parser temp",
+        "func": "var val=msg.payload;\nmsg.payload=val.temp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 620,
+        "wires": [
+            [
+                "5234cee59f3ffb11"
+            ]
+        ]
+    },
+    {
+        "id": "381e44621692fb95",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "parser humi",
+        "func": "var val=msg.payload;\nmsg.payload=val.humi;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 660,
+        "wires": [
+            [
+                "15dec382f73068a7"
+            ]
+        ]
+    },
+    {
+        "id": "499f4ce05105c445",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "parser light",
+        "func": "var val=msg.payload;\nmsg.payload=val.light;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 700,
+        "wires": [
+            [
+                "e807565d60ea8dc5"
+            ]
+        ]
+    },
+    {
+        "id": "2f46bbda3c9e698b",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "parser metane",
+        "func": "var val = msg.payload;\nmsg.payload = val.metane;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 800,
+        "wires": [
+            [
+                "a09eb7908596d6e5"
+            ]
+        ]
+    },
+    {
+        "id": "a09eb7908596d6e5",
+        "type": "debug",
+        "z": "d3e4be8004f8e611",
+        "name": "metane-kitchen",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "c02984662e259a9e",
+        "type": "debug",
+        "z": "d3e4be8004f8e611",
+        "name": "flame-kitchen",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "8c4da76d79589dc6",
+        "type": "debug",
+        "z": "d3e4be8004f8e611",
+        "name": "temp-kitchen",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "bd838d08a0197585",
+        "type": "debug",
+        "z": "d3e4be8004f8e611",
+        "name": "humi-kitchen",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "a88d6554340cb7e2",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "parser temp",
+        "func": "var val=msg.payload;\nmsg.payload=val.temp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 840,
+        "wires": [
+            [
+                "8c4da76d79589dc6"
+            ]
+        ]
+    },
+    {
+        "id": "9b859da556a88bcc",
+        "type": "function",
+        "z": "d3e4be8004f8e611",
+        "name": "parser humi",
+        "func": "var val=msg.payload;\nmsg.payload=val.humi;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 880,
+        "wires": [
+            [
+                "bd838d08a0197585"
+            ]
+        ]
+    },
+    {
+        "id": "679684cd75f451dc",
+        "type": "mqtt-broker",
+        "name": "My Broker",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
