@@ -1,0 +1,127 @@
+[
+    {
+        "id": "436f482847f0fdfc",
+        "type": "inject",
+        "z": "518c4956922a3288",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "30",
+        "payloadType": "num",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "454f985720a933c8"
+            ]
+        ]
+    },
+    {
+        "id": "64e144bb7d137560",
+        "type": "inject",
+        "z": "518c4956922a3288",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "27",
+        "payloadType": "num",
+        "x": 110,
+        "y": 240,
+        "wires": [
+            [
+                "454f985720a933c8"
+            ]
+        ]
+    },
+    {
+        "id": "f98c13e6099842a7",
+        "type": "debug",
+        "z": "518c4956922a3288",
+        "name": "> 28",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "71ddb6e28a3faa08",
+        "type": "debug",
+        "z": "518c4956922a3288",
+        "name": "<= 28",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "454f985720a933c8",
+        "type": "switch",
+        "z": "518c4956922a3288",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "28",
+                "vt": "str"
+            },
+            {
+                "t": "lte",
+                "v": "28",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 200,
+        "wires": [
+            [
+                "f98c13e6099842a7"
+            ],
+            [
+                "71ddb6e28a3faa08"
+            ]
+        ]
+    }
+]
