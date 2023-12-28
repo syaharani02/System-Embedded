@@ -1,5 +1,5 @@
 // Job 1 A(Langkah 2)
-// Ayum, Rani, Alfan
+// Rani, Ayum, Alfan
 
 const int ledPin = 5; // Pin untuk LED
 unsigned long previousMillis = 0; 
