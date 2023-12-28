@@ -1,0 +1,38 @@
+[
+    {
+        "id": "20eeb91ff3569137",
+        "type": "http in",
+        "z": "4153ca9d0623b403",
+        "d": true,
+        "name": "Input Dummy",
+        "url": "/testin",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 620,
+        "wires": [
+            [
+                "9df396bde3ad2562"
+            ]
+        ]
+    },
+    {
+        "id": "9df396bde3ad2562",
+        "type": "debug",
+        "z": "4153ca9d0623b403",
+        "d": true,
+        "name": "Dummy",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 620,
+        "wires": []
+    }
+]
