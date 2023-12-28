@@ -1,0 +1,84 @@
+[
+    {
+        "id": "c97d6a569f0caab7",
+        "type": "function",
+        "z": "9886bbf2ad59c653",
+        "name": "Fungsi",
+        "func": "var obj = msg.payload;\nmsg.payload = obj.temperature;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 180,
+        "wires": [
+            [
+                "a4ed9d38c50763b7"
+            ]
+        ]
+    },
+    {
+        "id": "03541d6425dc1c99",
+        "type": "inject",
+        "z": "9886bbf2ad59c653",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "/sensor",
+        "payload": "{\"temperature\":27,\"humidity\":50}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 180,
+        "wires": [
+            [
+                "48bab1cc8c80a4e0"
+            ]
+        ]
+    },
+    {
+        "id": "a4ed9d38c50763b7",
+        "type": "debug",
+        "z": "9886bbf2ad59c653",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "48bab1cc8c80a4e0",
+        "type": "json",
+        "z": "9886bbf2ad59c653",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "c97d6a569f0caab7"
+            ]
+        ]
+    }
+]
